@@ -12,10 +12,10 @@ dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
 
 # Constants for IBM COS values
-COS_ENDPOINT = os.environ.get("COS_ENDPOINT") # Current list avaiable at https://control.cloud-object-storage.cloud.ibm.com/v2/endpoints
-COS_API_KEY_ID = os.environ.get("COS_API_KEY_ID") # eg "W00YixxxxxxxxxxMB-odB-2ySfTrFBIQQWanc--P3byk"
-COS_INSTANCE_CRN = os.environ.get("COS_INSTANCE_CRN") # eg "crn:v1:bluemix:public:cloud-object-storage:global:a/3bf0d9003xxxxxxxxxx1c3e97696b71c:d6f04d83-6c4f-4a62-a165-696756d63903::"
-COS_AUTH_ENDPOINT = os.environ.get("COS_AUTH_ENDPOINT") # eg "https://iam.bluemix.net/oidc/token"
+COS_ENDPOINT = os.environ.get("COS_ENDPOINT")
+COS_API_KEY_ID = os.environ.get("COS_API_KEY_ID")
+COS_INSTANCE_CRN = os.environ.get("COS_INSTANCE_CRN")
+COS_AUTH_ENDPOINT = os.environ.get("COS_AUTH_ENDPOINT") 
 
 # Create resource
 cos = ibm_boto3.resource("s3",
@@ -64,6 +64,11 @@ get_bucket_contents(bn)
 @app.route("/")
 def home():
     return render_template('home.html', data=all_images_in_bucket)
+
+@app.route("/chat-bot")
+def chat_bot():
+    return render_template('chat-bot.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
