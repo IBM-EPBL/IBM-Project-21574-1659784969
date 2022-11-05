@@ -1,6 +1,5 @@
 FROM node
 
-
 RUN mkdir /home/app
 RUN git clone https://github.com/vj-abishek/facetime-server.git /home/app
 
