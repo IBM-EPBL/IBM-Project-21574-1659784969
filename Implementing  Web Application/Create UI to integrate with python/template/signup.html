@@ -1,0 +1,44 @@
+{% extends "layout.html" %} {% block content %}
+<div class="center">
+  <div class="container">
+    <div class="mx-auto mt-5 mx-300">
+      <h1>Sign up</h1>
+      <form action="/signup" method="post">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="Enter email"
+          />
+        </div>
+        <div class="form-group mt-3">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            placeholder="Password"
+          />
+        </div>
+        <div class="form-group mt-3">
+          <label for="password">Confirm password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            placeholder="Password"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Signup</button>
+      </form>
+      <p class="mt-4">Already have a account? <a href="/signin">Sign in</a></p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
