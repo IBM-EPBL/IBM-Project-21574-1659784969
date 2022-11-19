@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-server
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: flask-server
+  template:
+    metadata:
+      labels:
+        app: flask-server
+
+    spec:
+      containers:
+        - name: flask-server
+          image: icr.io/abishek/flask-server
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-server-service
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+  selector:
+    app: flask-server
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: flask-server-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+
+spec:
+  rules:
+    - http:
+        paths:
+          - backend:
+              service:
+                name: flask-server-service
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
